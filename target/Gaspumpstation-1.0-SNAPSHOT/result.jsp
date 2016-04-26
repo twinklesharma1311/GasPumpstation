@@ -13,22 +13,40 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1></h1>
-         <% if (request.getAttribute("authorizeResponse") != null) {%>
+        
+         
          
          <div class="container"> 
+             <h1>Pump Station</h1>
              <div class="row">
                  <div class="col-md-12">
-                     <h1><% out.println((String) request.getAttribute("authorizeResponse")); %></h1>
+                     <h1></h1>
+                     <form>
+                         <div class="form-group">
+                             <label for="fuelType">Fuel Type</label>
+                             <select class="form-control" name="fuelType">
+                                 <option value="101">Gasoline</option>
+                                 <option value="102">Diesel</option>
+                             </select>
+                         </div>
+                         <div class="form-group">
+                             <label for="selectGrade">Fuel Type</label>
+                             <select class="form-control" name="fuelType">
+                                 <option value="87">87</option>
+                                 <option value="89">89</option>
+                                 <option value="93">93</option>
+                             </select>
+                         </div>
+                         <div class="form-group">
+                             <button type="submit" name="start" class="col-md-6 btn btn-success">Start</button>
+                             <button type="submit" name="stop" class="col-md-6 btn btn-success">End</button>
+                         </div>
+                     </form>
                  </div>
-                 s
-                 
              </div>
-             
-             
          </div>
          
-         <% } %>
+         
         
         <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js></script><script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.min.js"><\/script>');</script>
         <!-- Latest compiled and minified JavaScript -->

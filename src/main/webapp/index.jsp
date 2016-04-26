@@ -20,9 +20,7 @@
             <h1>Welcome to Gas Pump Station</h1>
             <div class="row">
                 <div class="col-md-12">
-                    <form action="result" method="post" class="form">
-
-
+                    <form action="sale" method="post" class="form">
 
                         <div class="ccjs-card">
                             <label class="ccjs-number">

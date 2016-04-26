@@ -6,7 +6,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
-        <url-pattern>/result</url-pattern>
+        <url-pattern>/sale</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
