@@ -1,17 +1,26 @@
 package adapter.pump;
 
+import domain.util.external.ExternalNozzleTrigger;
+
 public class NozzleSystem {
-
-
+	
+	ExternalNozzleTrigger nozzleTrigger = new ExternalNozzleTrigger();
+	
     public void returnNozzle() {
-    	//returns the nozzle to its place
+    	boolean active = nozzleTrigger.getState();
+    	
+    	if(active) {
+    		nozzleTrigger.deactivate();
+    	}
+    	
+    	nozzleTrigger.reset();
     }
 
     public void engageTrigger() {
-    	//enables pumping
+    	nozzleTrigger.activate();
     }
 
     public void disengageTrigger() {
-    	//disables pumping
+    	nozzleTrigger.deactivate();
     }
 }

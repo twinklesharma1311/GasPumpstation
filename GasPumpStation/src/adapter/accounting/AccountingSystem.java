@@ -1,14 +1,19 @@
 package adapter.accounting;
-import domain.model.Sale;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import domain.model.Sale;
+import domain.util.external.LoggingSystem;
+
 public class AccountingSystem {
 
-    List<Sale> sales;
-
+	private LoggingSystem loggingSystem = new LoggingSystem();
+	
     public List<Sale> searchSale(Date date) {
-    	//contact external logging system
-    	return null;
+    	Calendar calendar = Calendar.getInstance();
+    	calendar.setTime(date);
+    	
+    	return loggingSystem.searchSale(calendar);
     }
 }

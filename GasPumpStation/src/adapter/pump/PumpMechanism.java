@@ -1,20 +1,21 @@
 package adapter.pump;
 
+import domain.util.external.ExternalPumpTrigger;
+
 
 public class PumpMechanism {
+	
+	ExternalPumpTrigger pumpTrigger = new ExternalPumpTrigger();
 
     public void arm() {
-    	//arms
+    	pumpTrigger.arm();
     }
     
     public void disarm() {
-    	//disarms
+    	pumpTrigger.disarm();
     }
 
 	public int getQuantity() {
-		int quantity = 0;
-		//tracks running total
-		return quantity;
+		return pumpTrigger.getRunningTotal();
 	}
-
 }
