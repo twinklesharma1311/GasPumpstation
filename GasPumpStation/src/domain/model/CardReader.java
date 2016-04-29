@@ -11,7 +11,7 @@ public class CardReader {
 	public void waitSwipe() {
 		
     	System.out.println("Swipe your credit card to start: ");
-    	int creditCardNo = Integer.parseInt(Console.getScanner().nextLine());
+    	long creditCardNo = Long.parseLong(Console.getScanner().nextLine());
     	
     	System.out.println("Type the expiration date (mm/yyyy): ");
     	String date = Console.getScanner().nextLine();

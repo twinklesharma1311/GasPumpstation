@@ -8,7 +8,7 @@ public class ExternalCCSystem {
 		//external system
 	}
 
-	public boolean authorize(int num, Date expDate, int cvv) {
+	public boolean authorize(long num, Date expDate, int cvv) {
 		//external system
 		return true;
 	}
@@ -17,7 +17,7 @@ public class ExternalCCSystem {
 		//external system
 	}
 
-	public void charge(int num, Date expDate, int cvv, double amount) {
+	public void charge(long num, Date expDate, int cvv, double amount) {
 		// external system
 	}
 

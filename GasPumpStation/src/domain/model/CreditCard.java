@@ -4,28 +4,28 @@ import java.util.Date;
 
 public class CreditCard {
 	
-    private int num;
+    private long num;
     private int cvv;
     private Date expDate;
     private String name;
     
-    public CreditCard(int num, Date expDate) {
+    public CreditCard(long num, Date expDate) {
         this.num = num;
         this.expDate = expDate;
     }
 
-    public CreditCard(int num, int cvv, Date expDate, String name) {
+    public CreditCard(long num, int cvv, Date expDate, String name) {
         this.num = num;
         this.cvv = cvv;
         this.expDate = expDate;
         this.name = name;
     }
 
-    public int getNum() {
+    public long getNum() {
         return num;
     }
 
-    public void setNum(int num) {
+    public void setNum(long num) {
         this.num = num;
     }
 

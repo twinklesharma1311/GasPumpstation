@@ -1,5 +1,7 @@
 package domain.model;
 
+import java.text.DecimalFormat;
+
 public class ReceiptPrinter {
 
     public void printTotal(double amount, double quantity) {
@@ -11,7 +13,7 @@ public class ReceiptPrinter {
     	System.out.println("Ronaldson, TX");
     	System.out.println("----------------------------------------");
     	System.out.println("Fuel:\t\t\t\t"+quantity+" L");
-    	System.out.println("Price:\t\t\t\t$ "+amount);
+    	System.out.println("Price:\t\t\t\t$ "+new DecimalFormat("#.##").format(amount));
     }
     
 }

@@ -63,7 +63,7 @@ public class MainController {
 		this.pumpMachine = pumpMachine;
 	}
 
-	public void swipeCC(int creditCardNo, Date expDate) {
+	public void swipeCC(long creditCardNo, Date expDate) {
 		CreditCard creditCard = new CreditCard(creditCardNo, expDate);
 		
 		boolean isAuthorized = cardServices.authorize(creditCard);
