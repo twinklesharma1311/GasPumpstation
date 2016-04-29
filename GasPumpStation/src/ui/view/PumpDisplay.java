@@ -10,4 +10,10 @@ public class PumpDisplay {
     	System.out.println();
     	
     }
+    
+    public void update(String newMessage) {
+    	message = newMessage;
+    	
+    	System.out.println(message);
+    }
 }

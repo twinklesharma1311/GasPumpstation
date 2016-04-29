@@ -4,7 +4,9 @@ import java.util.Date;
 import java.util.Scanner;
 
 import ui.view.PumpDisplay;
+import ui.view.SaleDeviceDisplay;
 import adapter.GasInventory;
+import adapter.accounting.AccountingSystem;
 import adapter.accounting.CardAuthorization;
 import adapter.pump.NozzleSystem;
 import adapter.pump.PumpMechanism;
@@ -15,23 +17,35 @@ import domain.model.FuelSelector;
 import domain.model.FuelType;
 import domain.model.Gasoline;
 import domain.model.GradeSelector;
+import domain.model.PumpMachine;
 import domain.model.ReceiptPrinter;
 import domain.model.Sale;
+import domain.model.SaleDevice;
 import domain.util.Console;
 import domain.util.Grade;
 
 public class MainController {
 	
-	private CardAuthorization cardServices;
-	private FuelSelector fuelSelector;
-	private GradeSelector gradeSelector;
+	public static void main(String[] args) {
+		MainController controller = init();
+		
+		controller.getPumpMachine().getSaledevice().getReader().waitSwipe();
+	}
 	
-	private GasInventory gasInventory;
-	private PumpMechanism pumpMechanism;
-	private NozzleSystem nozzleSystem;
+	private static MainController instance = null;
+
+	public static MainController getInstance() {
+      if(instance == null) {
+         instance = init();
+      }
+      return instance;
+	}
 	
-	private PumpDisplay display;
-	private ReceiptPrinter printer;
+	private AccountingSystem accSystem = new AccountingSystem();
+	private CardAuthorization cardServices = new CardAuthorization();
+	private GasInventory gasInventory = new GasInventory();
+	private PumpMechanism pumpMechanism = new PumpMechanism();
+	private PumpMachine pumpMachine = new PumpMachine();
 	
 	private Sale currentSale;
 	private double currentPrice;
@@ -39,33 +53,16 @@ public class MainController {
 	private int qty;
 	private double amt;
 	
-	protected MainController() {
-		cardServices = new CardAuthorization();
-		fuelSelector = new FuelSelector();
-		gradeSelector = new GradeSelector();
-		
-		gasInventory = new GasInventory();
-		pumpMechanism = new PumpMechanism();
-		nozzleSystem = new NozzleSystem();
-		
-		display = new PumpDisplay();
-		printer = new ReceiptPrinter();
+	public MainController(AccountingSystem accSystem,
+			CardAuthorization cardAuthorization, GasInventory gasInventory,
+			PumpMechanism pumpMechanism, PumpMachine pumpMachine) {
+		this.accSystem = accSystem;
+		this.cardServices = cardAuthorization;
+		this.gasInventory = gasInventory;
+		this.pumpMechanism = pumpMechanism;
+		this.pumpMachine = pumpMachine;
 	}
-	
-	private static MainController instance = null;
 
-	public static MainController getInstance() {
-      if(instance == null) {
-         instance = new MainController();
-      }
-      return instance;
-	}
-	
-	public static void main(String[] args) {
-		CardReader reader = new CardReader();
-		reader.waitSwipe();
-	}
-	
 	public void swipeCC(int creditCardNo, Date expDate) {
 		CreditCard creditCard = new CreditCard(creditCardNo, expDate);
 		
@@ -80,10 +77,10 @@ public class MainController {
 	}
 
 	private void selectFuel() {
-		FuelType selectedFuel = fuelSelector.selectFuel();
+		FuelType selectedFuel = pumpMachine.getFuelSelector().selectFuel();
 		
 		if(selectedFuel instanceof Gasoline) {
-			gradeSelector.selectGrade();
+			pumpMachine.getGradeSelector().selectGrade();
 			
 		} else {
 			Diesel gas = new Diesel();
@@ -116,10 +113,10 @@ public class MainController {
 	}
 
 	private void waitTrigger() {
-		System.out.println("Enter desired quantity (0 - unlimited): ");
+		pumpMachine.getDisplay().update("Enter desired quantity (0 - unlimited): ");
     	qty = Console.getScanner().nextInt();
     	
-    	nozzleSystem.engageTrigger();
+    	pumpMachine.getNozzleSystem().engageTrigger();
 
     	for (int quantity = 1; quantity <= qty; quantity++) {
     		
@@ -128,7 +125,7 @@ public class MainController {
     		
     		pumpMechanism.getQuantity();
     		
-    		display.update(amt, quantity);
+    		pumpMachine.getDisplay().update(amt, quantity);
     		
     		//Simulate 1/10 second
     		try {
@@ -153,20 +150,90 @@ public class MainController {
 	}
 
 	private void endSale() {
-		display.update(amt, qty);
+		pumpMachine.getDisplay().update(amt, qty);
 		
 		gasInventory.update(qty);
 		
 		Scanner scan = new Scanner(System.in);
 		
-		System.out.println("Would you like your receipt (y/n)?  ");
+		pumpMachine.getDisplay().update("Would you like your receipt (y/n)?  ");
     	String print = scan.nextLine();
         
     	if("y".equalsIgnoreCase(print)) {
-    		printer.setTotal(amt, qty);
+    		pumpMachine.getSaledevice().getPrinter().setTotal(amt, qty);
     	}
     	
     	scan.close();
+	}
+	
+	public AccountingSystem getAccSystem() {
+		return accSystem;
+	}
+
+	public void setAccSystem(AccountingSystem accSystem) {
+		this.accSystem = accSystem;
+	}
+
+	public CardAuthorization getCardAuthorization() {
+		return cardServices;
+	}
+
+	public void setCardAuthorization(CardAuthorization cardAuthorization) {
+		this.cardServices = cardAuthorization;
+	}
+
+	public GasInventory getGasInventory() {
+		return gasInventory;
+	}
+
+	public void setGasInventory(GasInventory gasInventory) {
+		this.gasInventory = gasInventory;
+	}
+
+	public PumpMechanism getPumpMechanism() {
+		return pumpMechanism;
+	}
+
+	public void setPumpMechanism(PumpMechanism pumpMechanism) {
+		this.pumpMechanism = pumpMechanism;
+	}
+
+	public PumpMachine getPumpMachine() {
+		return pumpMachine;
+	}
+
+	public void setPumpMachine(PumpMachine pumpMachine) {
+		this.pumpMachine = pumpMachine;
+	}
+
+	private static MainController init() {
+		CardReader reader = new CardReader();
+		SaleDeviceDisplay saleDisplay = new SaleDeviceDisplay();
+		ReceiptPrinter printer = new ReceiptPrinter();
+		
+		SaleDevice saleDevice = new SaleDevice();
+		saleDevice.setDisplay(saleDisplay);
+		saleDevice.setPrinter(printer);
+		saleDevice.setReader(reader);
+		
+		FuelSelector fuelSelector = new FuelSelector();
+		GradeSelector gradeSelector = new GradeSelector();
+		NozzleSystem nozzleSystem = new NozzleSystem();
+		PumpDisplay pumpDisplay = new PumpDisplay();
+		
+		PumpMachine pumpMachine = new PumpMachine();
+		pumpMachine.setSaledevice(saleDevice);
+		pumpMachine.setFuelSelector(fuelSelector);
+		pumpMachine.setGradeSelector(gradeSelector);
+		pumpMachine.setNozzleSystem(nozzleSystem);
+		pumpMachine.setDisplay(pumpDisplay);
+		
+		AccountingSystem accSystem = new AccountingSystem();
+		CardAuthorization cardAuthorization = new CardAuthorization();
+		GasInventory gasInventory = new GasInventory();
+		PumpMechanism pumpMechanism = new PumpMechanism();
+		
+		return new MainController(accSystem, cardAuthorization, gasInventory, pumpMechanism, pumpMachine);
 	}
 
 }
