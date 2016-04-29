@@ -1,13 +1,13 @@
 package ui.view;
 
-import java.text.DecimalFormat;
+import domain.util.OutputFormat;
 
 public class PumpDisplay {
 
     private String message;
 
     public void update(double amount, double quantity) {
-    	System.out.println("Price($): "+new DecimalFormat("#.##").format(amount));
+    	System.out.println("Price($): "+ OutputFormat.format(amount));
     	System.out.println("Fuel(L): "+quantity);
     	System.out.println();
     	

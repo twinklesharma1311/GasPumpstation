@@ -1,6 +1,6 @@
 package domain.model;
 
-import java.text.DecimalFormat;
+import domain.util.OutputFormat;
 
 public class ReceiptPrinter {
 
@@ -13,7 +13,7 @@ public class ReceiptPrinter {
     	System.out.println("Ronaldson, TX");
     	System.out.println("----------------------------------------");
     	System.out.println("Fuel:\t\t\t\t"+quantity+" L");
-    	System.out.println("Price:\t\t\t\t$ "+new DecimalFormat("#.##").format(amount));
+    	System.out.println("Price:\t\t\t\t$ "+OutputFormat.format(amount));
     }
     
 }
