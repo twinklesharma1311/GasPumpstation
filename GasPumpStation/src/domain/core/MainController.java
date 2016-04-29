@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 import ui.view.PumpDisplay;
 import ui.view.SaleDeviceDisplay;
-import adapter.GasInventory;
 import adapter.accounting.AccountingSystem;
 import adapter.accounting.CardAuthorization;
+import adapter.accounting.GasInventory;
 import adapter.pump.NozzleSystem;
 import adapter.pump.PumpMechanism;
 import domain.model.CardReader;
@@ -84,7 +84,7 @@ public class MainController {
 			
 		} else {
 			Diesel gas = new Diesel();
-			currentPrice = gasInventory.getDetails(gas);
+			currentPrice = gasInventory.getPriceDetails(gas);
 			
 			pumpMechanism.arm();
 			
@@ -105,7 +105,7 @@ public class MainController {
 		
 		Gasoline gas = new Gasoline(selectedGrade);
 		
-		currentPrice = gasInventory.getDetails(gas);
+		currentPrice = gasInventory.getPriceDetails(gas);
 		
 		pumpMechanism.arm();
 		
@@ -113,7 +113,7 @@ public class MainController {
 	}
 
 	private void waitTrigger() {
-		pumpMachine.getDisplay().update("Enter desired quantity (0 - unlimited): ");
+		pumpMachine.getDisplay().update("Enter desired quantity (L): ");
     	qty = Console.getScanner().nextInt();
     	
     	pumpMachine.getNozzleSystem().engageTrigger();
@@ -160,7 +160,7 @@ public class MainController {
     	String print = scan.nextLine();
         
     	if("y".equalsIgnoreCase(print)) {
-    		pumpMachine.getSaledevice().getPrinter().setTotal(amt, qty);
+    		pumpMachine.getSaledevice().getPrinter().printTotal(amt, qty);
     	}
     	
     	scan.close();

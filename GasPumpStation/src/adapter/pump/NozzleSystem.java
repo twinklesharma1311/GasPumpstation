@@ -4,7 +4,7 @@ import domain.util.external.ExternalNozzleTrigger;
 
 public class NozzleSystem {
 	
-	ExternalNozzleTrigger nozzleTrigger = new ExternalNozzleTrigger();
+	private ExternalNozzleTrigger nozzleTrigger = new ExternalNozzleTrigger();
 	
     public void returnNozzle() {
     	boolean active = nozzleTrigger.getState();

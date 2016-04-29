@@ -4,10 +4,10 @@ import domain.util.Grade;
 
 public class Gasoline extends FuelType {
 
-    Grade grade;
+	private Grade grade;
     
     public Gasoline() {
-    	
+    	this(Grade.EIGHTYSEVEN);
     }
 
     public Gasoline(Grade grade) {

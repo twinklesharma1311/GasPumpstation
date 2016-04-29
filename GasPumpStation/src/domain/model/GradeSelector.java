@@ -6,7 +6,7 @@ import domain.util.Grade;
 
 public class GradeSelector {
 
-    Grade selectedGrade;
+	private Grade selectedGrade;
 
     public void selectGrade() {
 		System.out.println("Select gasoline grade - (87, 89, or 93):  ");
@@ -15,4 +15,11 @@ public class GradeSelector {
     	MainController.getInstance().selectGrade(gradeId);
     }
 
+	public Grade getSelectedGrade() {
+		return selectedGrade;
+	}
+
+	public void setSelectedGrade(Grade selectedGrade) {
+		this.selectedGrade = selectedGrade;
+	}
 }

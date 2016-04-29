@@ -2,7 +2,7 @@ package ui.view;
 
 public class PumpDisplay {
 
-    String message;
+    private String message;
 
     public void update(double amount, double quantity) {
     	System.out.println("Price($): "+amount);

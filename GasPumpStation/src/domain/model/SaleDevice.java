@@ -4,9 +4,9 @@ import ui.view.SaleDeviceDisplay;
 
 public class SaleDevice {
 
-    ReceiptPrinter printer;
-    CardReader reader;
-    SaleDeviceDisplay display;
+    private ReceiptPrinter printer;
+    private CardReader reader;
+    private SaleDeviceDisplay display;
     
 	public ReceiptPrinter getPrinter() {
 		return printer;

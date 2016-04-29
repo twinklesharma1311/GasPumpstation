@@ -2,12 +2,13 @@ package domain.util.external;
 
 public class PriceSystem {
 	
-	public static final double GASOLINE_REGULAR = 1.75;
-	public static final double GASOLINE_MIDGRADE = 1.89;
-	public static final double GASOLINE_PREMIUM = 1.98;
-	public static final double DIESEL = 1.71;
+	//external system values
+	private static final double GASOLINE_REGULAR = 1.75;
+	private static final double GASOLINE_MIDGRADE = 1.89;
+	private static final double GASOLINE_PREMIUM = 1.98;
+	private static final double DIESEL = 1.71;
 	
-	public double getCurrentGasolineValue(double d) {
+	public double getCurrentGasolinePrice(double d) {
 		double currentPrice = 0;
 
 		if(d == 87) {
@@ -21,7 +22,7 @@ public class PriceSystem {
 		return currentPrice;
 	}
 
-	public double getCurrentDieselValue() {
+	public double getCurrentDieselPrice() {
 		return DIESEL;
 	}
 }

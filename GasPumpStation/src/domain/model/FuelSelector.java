@@ -4,7 +4,7 @@ import domain.util.Console;
 
 public class FuelSelector {
 
-    FuelType selectedFuel;
+	private FuelType selectedFuel;
 
 	public FuelType selectFuel() {
 		System.out.println("Select the fuel type - (1)Gasoline (2)Diesel:  ");

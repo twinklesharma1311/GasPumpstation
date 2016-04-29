@@ -3,6 +3,7 @@ package domain.model;
 import java.util.Date;
 
 public class CreditCard {
+	
     private int num;
     private int cvv;
     private Date expDate;
