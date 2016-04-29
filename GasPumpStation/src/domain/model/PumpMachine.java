@@ -13,6 +13,20 @@ public class PumpMachine {
     private NozzleSystem nozzleSystem;
     private PumpDisplay display;
     
+    public PumpMachine() {
+    	SaleDevice saleDevice = new SaleDevice();
+		GradeSelector gradeSelector = new GradeSelector();
+		FuelSelector fuelSelector = new FuelSelector();
+		NozzleSystem nozzleSystem = new NozzleSystem();
+		PumpDisplay pumpDisplay = new PumpDisplay();
+		
+		setSaledevice(saleDevice);
+		setGradeSelector(gradeSelector);
+		setFuelSelector(fuelSelector);
+		setNozzleSystem(nozzleSystem);
+		setDisplay(pumpDisplay);
+    }
+    
 	public double getCurrentQuantity() {
 		return currentQuantity;
 	}

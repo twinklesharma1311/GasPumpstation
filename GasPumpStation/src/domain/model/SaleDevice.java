@@ -8,6 +8,16 @@ public class SaleDevice {
     private CardReader reader;
     private SaleDeviceDisplay display;
     
+	public SaleDevice() {
+		CardReader reader = new CardReader();
+		SaleDeviceDisplay saleDisplay = new SaleDeviceDisplay();
+		ReceiptPrinter printer = new ReceiptPrinter();
+		
+		setDisplay(saleDisplay);
+		setPrinter(printer);
+		setReader(reader);
+	}
+	
 	public ReceiptPrinter getPrinter() {
 		return printer;
 	}
