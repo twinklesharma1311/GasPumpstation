@@ -1,4 +1,4 @@
-# GAS STATION
+# GAS PUMP STATION
 This is a Object-Oriented Software Engineering project.
 The java application is a control system for a gas station pump. 
 
